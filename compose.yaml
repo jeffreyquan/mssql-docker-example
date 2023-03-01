@@ -1,0 +1,18 @@
+services:
+  database:
+    build: .
+    container_name: database
+    restart: always
+    volumes:
+      - ./data:/var/opt/mssql/data
+      - ./log:/var/opt/mssql/log
+      - ./secrets:/var/opt/mssql/secrets
+    environment:
+      - ACCEPT_EULA=Y
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_SERVER_URL=${DB_SERVER_URL}
+      - MSSQL_SA_PASSWORD=${DB_PASSWORD}
+      - SCHEMA=${SCHEMA}
+    ports:
+      - 1433:1433
